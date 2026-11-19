@@ -1,26 +1,104 @@
 @import "tailwindcss";
 
+/*
+  Design tokens extracted from https://mattis.framer.website
+  (see reference/mattis/tokens/tokens.css)
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* core palette */
+  --black: rgb(11, 11, 11);
+  --near-black: rgb(14, 14, 14);
+  --off-black: rgb(13, 13, 13);
+  --white: rgb(255, 255, 255);
+  --orange: rgb(255, 69, 0);
+  --grey: rgb(233, 233, 233);
+  --muted: rgb(118, 118, 118);
+
+  /* alpha helpers */
+  --white-70: rgba(255, 255, 255, 0.7);
+  --white-60: rgba(255, 255, 255, 0.6);
+  --white-50: rgba(255, 255, 255, 0.5);
+  --white-40: rgba(255, 255, 255, 0.4);
+  --black-60: rgba(11, 11, 11, 0.6);
+  --black-12: rgba(11, 11, 11, 0.12);
+
+  --radius-pill: 50px;
+  --radius-card: 10px;
+
+  --background: var(--white);
+  --foreground: var(--black);
 }
 
 @theme inline {
+  --color-black: var(--black);
+  --color-white: var(--white);
+  --color-orange: var(--orange);
+  --color-grey: var(--grey);
+  --color-muted: var(--muted);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--background);
+  background: var(--black);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* tiny uppercase labels used everywhere on the source */
+.eyebrow {
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* grain overlay reused across dark/orange sections */
+.grain {
+  background-image: url("/images/1dae10b6-rR6HYXBrMmX4cRpXfXUOvpvpB0.png");
+  background-repeat: repeat;
+  background-size: 180px;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+::selection {
+  background: var(--orange);
+  color: var(--white);
+}
+
+/* The giant display headings (Mattis uses tightly-tracked, heavy Geist) */
+.display {
+  font-weight: 600;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
 }
